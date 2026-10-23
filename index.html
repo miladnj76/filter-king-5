@@ -4,30 +4,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>اسکنر کینگ فایو | LBank</title>
+<meta name="theme-color" content="#0b1020">
+<title>اسکنر کینگ فایو LBank</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#0b1020;color:#edf2ff;font-family:Tahoma,Arial,sans-serif;padding:14px}
-main{max-width:1050px;margin:auto}
-h1{font-size:23px;color:#f5c451;margin:8px 0}
-p{color:#b8c4df;line-height:1.9;font-size:13px}
+body{margin:0;padding:14px;background:#0b1020;color:#edf2ff;font-family:Tahoma,Arial,sans-serif}
+main{max-width:1100px;margin:auto}
+h1{font-size:23px;color:#f5c451}
+p{font-size:13px;line-height:2;color:#bdc9df}
 .panel{background:#151e32;border:1px solid #2a3958;border-radius:14px;padding:14px;margin:12px 0}
-button{border:0;border-radius:9px;padding:12px 17px;background:#f5c451;color:#151515;font-weight:bold;font-size:15px;cursor:pointer}
+button{padding:12px 16px;border:0;border-radius:9px;background:#f5c451;color:#151515;font-weight:bold;font-size:14px;cursor:pointer}
 button:disabled{opacity:.5}
+.stop{background:#35435e;color:white}
 .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.stat{background:#202b43;border-radius:10px;padding:12px}
+.stat{padding:12px;background:#202b43;border-radius:10px;font-size:12px}
 .stat b{display:block;color:#f5c451;font-size:21px;margin-top:8px}
-.small{font-size:12px;color:#aab8d2;line-height:1.8}
-.status{white-space:pre-wrap;line-height:1.9;color:#c7d4ef;font-size:13px}
+.small{font-size:11px;color:#aab8d2;line-height:1.9}
+.status{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:2;color:#cbd7ed}
 .tablewrap{overflow-x:auto}
-table{border-collapse:collapse;width:100%;min-width:760px;font-size:12px}
-th,td{padding:10px 8px;text-align:center;border-bottom:1px solid #2c3952}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:12px}
+th,td{padding:10px 7px;text-align:center;border-bottom:1px solid #2c3952}
 th{background:#202b43;color:#f5c451}
-tr:hover td{background:#19253b}
-.score{color:#6ee7a0;font-weight:bold;font-size:15px}
-.good{color:#6ee7a0}
-.bad{color:#ff9c9c}
-.tag{display:inline-block;border:1px solid #425373;border-radius:6px;padding:3px 6px;margin:2px}
+.score{color:#6ee7a0;font-size:15px;font-weight:bold}
+.tag{display:inline-block;border:1px solid #425373;border-radius:6px;padding:5px;margin:3px}
 a{color:#8cc8ff}
 </style>
 </head>
@@ -35,22 +34,22 @@ a{color:#8cc8ff}
 <main>
 <h1>👑 اسکنر کینگ فایو</h1>
 <p>
-اسکن بازار Spot صرافی LBank با پنج الگوی انفجار، بوم، رادار، میلاد و طلایی.
-فقط نامزدهای دارای امتیاز بیشتر از ۶٫۵ از ۱۰ نمایش داده می‌شوند.
+اسکن بازار Spot در LBank با پنج الگوی ترکیب انفجار، بوم، رادار، میلاد و طلایی.
+فقط امتیازهای بیشتر از ۶٫۵ از ۱۰ نمایش داده می‌شوند.
 </p>
 
 <div class="panel">
-<button id="scanBtn" onclick="startScan()">🚀 شروع اسکن</button>
-<button id="stopBtn" onclick="stopScan()" style="background:#35435e;color:white;margin-right:6px">توقف</button>
+<button id="scanBtn">🚀 شروع اسکن</button>
+<button id="stopBtn" class="stop">توقف اسکن</button>
 <p class="small">
-تایم‌فریم تحلیل: یک‌ساعته | حداکثر ۶۰ نماد برای بررسی تفصیلی
-<br>این اسکنر سفارش خرید یا فروش ثبت نمی‌کند.
+تحلیل کندل یک‌ساعته | حداکثر ۶۰ نماد برای تحلیل تفصیلی
+<br>این ابزار سفارش خرید یا فروش ثبت نمی‌کند.
 </p>
 </div>
 
 <div class="panel stats">
-<div class="stat">نمادهای دریافتی از بازار<b id="markets">۰</b></div>
-<div class="stat">بررسی تفصیلی موفق<b id="checked">۰</b></div>
+<div class="stat">جفت‌ارزهای دریافتی<b id="markets">۰</b></div>
+<div class="stat">تحلیل موفق<b id="checked">۰</b></div>
 <div class="stat">نامزدهای بالای ۶٫۵<b id="found">۰</b></div>
 <div class="stat">خطاهای داده<b id="errors">۰</b></div>
 </div>
@@ -62,7 +61,7 @@ a{color:#8cc8ff}
 </div>
 
 <div class="panel">
-<strong>پنج فیلتر فعال</strong>
+<strong>فیلترهای فعال</strong>
 <p>
 <span class="tag">💥 ترکیب انفجار</span>
 <span class="tag">🧨 الگوی بوم</span>
@@ -70,27 +69,26 @@ a{color:#8cc8ff}
 <span class="tag">👤 میلاد</span>
 <span class="tag">🥇 طلایی</span>
 </p>
-<div class="small">
-امتیاز بر اساس داده‌های قابل اندازه‌گیری بازار محاسبه می‌شود.
-این امتیاز، میزان تطابق با الگوی اسکن است و احتمال قطعی پامپ یا سود را نشان نمی‌دهد.
-</div>
+<p class="small">
+امتیاز نشان‌دهنده تطابق با شاخص‌های فنی این نسخه است، نه تضمین پامپ یا سود.
+</p>
 </div>
 
 <div class="panel">
-<strong>نتیجه کینگ فایو</strong>
+<strong>نتایج کینگ فایو</strong>
 <div class="tablewrap">
 <table>
 <thead>
 <tr>
 <th>رتبه</th>
-<th>ارز</th>
+<th>نماد</th>
 <th>قیمت</th>
 <th>تغییر ۲۴ساعته</th>
-<th>افزایش حجم</th>
-<th>وضعیت قیمت</th>
+<th>نسبت حجم</th>
+<th>تغییر ۱ و ۴ ساعت</th>
 <th>هم‌پوشانی</th>
-<th>امتیاز / ۱۰</th>
-<th>معامله</th>
+<th>امتیاز</th>
+<th>بازار</th>
 </tr>
 </thead>
 <tbody id="results">
@@ -101,146 +99,228 @@ a{color:#8cc8ff}
 </div>
 
 <div class="panel">
-<strong>گزارش محدودیت داده</strong>
-<div id="details" class="status">هنوز اطلاعاتی ثبت نشده است.</div>
+<strong>گزارش خطا و محدودیت</strong>
+<div id="details" class="status">آماده اسکن.</div>
 </div>
 </main>
 
 <script>
 "use strict";
 
-const API = "https://api.lbkex.com/v2";
+const API_HOSTS = [
+  "https://api.lbkex.com",
+  "https://api.lbank.info"
+];
+
 const MAX_DETAIL = 60;
 const CONCURRENCY = 4;
+
 let cancelled = false;
 let running = false;
 
 const $ = id => document.getElementById(id);
 
-function number(v) {
-  const n = Number(v);
-  return Number.isFinite(n) ? n : NaN;
-}
-
-function fmt(v, digits=8) {
-  if (!Number.isFinite(v)) return "—";
-  return v.toLocaleString("en-US", {
+function fmt(n, digits=8) {
+  if (!Number.isFinite(n)) return "—";
+  return n.toLocaleString("en-US", {
     maximumFractionDigits: digits
   });
 }
 
-function pct(v) {
-  return Number.isFinite(v) ? (v >= 0 ? "+" : "") + v.toFixed(2) + "%" : "—";
+function pct(n) {
+  if (!Number.isFinite(n)) return "—";
+  return (n > 0 ? "+" : "") + n.toFixed(2) + "%";
 }
 
-function setStatus(s) {
-  $("status").textContent = s;
+function num(v) {
+  if (v === null || v === undefined || v === "") return NaN;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : NaN;
 }
 
-async function getJSON(url, timeout=12000) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeout);
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      cache: "no-store",
-      signal: controller.signal
-    });
-    if (!response.ok) {
-      throw new Error("HTTP " + response.status);
+function clamp(v) {
+  return Math.max(0, Math.min(10, v));
+}
+
+function setStatus(text) {
+  $("status").textContent = text;
+}
+
+/*
+ * تلاش متوالی برای دو میزبان API.
+ * خطاهای شبکه و HTTP برای هر میزبان ثبت می‌شوند.
+ */
+async function getJSON(path, timeout=12000) {
+  const failures = [];
+
+  for (const host of API_HOSTS) {
+    if (cancelled) throw new Error("اسکن متوقف شد.");
+
+    const controller = new AbortController();
+    const timer = setTimeout(
+      () => controller.abort(),
+      timeout
+    );
+
+    try {
+      const response = await fetch(host + path, {
+        method: "GET",
+        cache: "no-store",
+        signal: controller.signal
+      });
+
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
+
+      const json = await response.json();
+
+      if (
+        json.error_code !== undefined &&
+        Number(json.error_code) !== 0
+      ) {
+        throw new Error(
+          json.msg || ("API error " + json.error_code)
+        );
+      }
+
+      if (
+        json.result !== undefined &&
+        String(json.result).toLowerCase() === "false"
+      ) {
+        throw new Error(json.msg || "API result=false");
+      }
+
+      return json;
+    } catch (e) {
+      failures.push(
+        host + " → " + (e.message || "Network error")
+      );
+    } finally {
+      clearTimeout(timer);
     }
-    const json = await response.json();
-    if (json.error_code && Number(json.error_code) !== 0) {
-      throw new Error(json.msg || ("API error " + json.error_code));
-    }
-    if (String(json.result) === "false") {
-      throw new Error(json.msg || "پاسخ ناموفق API");
-    }
-    return json;
-  } finally {
-    clearTimeout(timer);
   }
+
+  throw new Error(
+    "هر دو آدرس API ناموفق بودند:\n" +
+    failures.join("\n")
+  );
 }
 
 async function getTickers() {
   const json = await getJSON(
-    API + "/ticker/24hr.do?symbol=all"
+    "/v2/ticker/24hr.do?symbol=all"
   );
 
   let rows = json.data;
+
   if (!Array.isArray(rows)) {
-    if (rows && typeof rows === "object") rows = [rows];
-    else throw new Error("ساختار تیکر قابل شناسایی نیست");
+    if (rows && typeof rows === "object") {
+      rows = [rows];
+    } else {
+      throw new Error(
+        "ساختار تیکر قابل شناسایی نیست: " +
+        JSON.stringify(json).slice(0, 300)
+      );
+    }
   }
 
-  return rows.map(x => {
-    const t = x.ticker || x;
+  return rows.map(item => {
+    const t = item.ticker || item;
+
     return {
-      symbol: String(x.symbol || t.symbol || "").toLowerCase(),
-      price: number(t.latest || t.close || t.last),
-      change: number(t.change),
-      volume: number(t.vol),
-      turnover: number(t.turnover),
-      high: number(t.high),
-      low: number(t.low)
+      symbol: String(
+        item.symbol || t.symbol || ""
+      ).toLowerCase(),
+      price: num(t.latest ?? t.close ?? t.last),
+      change: num(t.change),
+      volume: num(t.vol),
+      turnover: num(t.turnover),
+      high: num(t.high),
+      low: num(t.low)
     };
   }).filter(x =>
     /^[a-z0-9]+_usdt$/.test(x.symbol) &&
-    Number.isFinite(x.price) && x.price > 0
+    Number.isFinite(x.price) &&
+    x.price > 0
   );
 }
 
 async function getCandles(symbol) {
-  const url = API + "/kline.do?symbol=" +
+  const path =
+    "/v2/kline.do?symbol=" +
     encodeURIComponent(symbol) +
     "&type=hour1&size=30";
 
-  const json = await getJSON(url);
-  if (!Array.isArray(json.data) || json.data.length < 12) {
-    throw new Error("کندل کافی دریافت نشد");
+  const json = await getJSON(path);
+
+  if (!Array.isArray(json.data)) {
+    throw new Error("پاسخ کندل آرایه نیست");
   }
 
-  return json.data.map(k => ({
-    time: number(k[0]),
-    open: number(k[1]),
-    high: number(k[2]),
-    low: number(k[3]),
-    close: number(k[4]),
-    volume: number(k[5])
+  const candles = json.data.map(k => ({
+    time: num(k[0]),
+    open: num(k[1]),
+    high: num(k[2]),
+    low: num(k[3]),
+    close: num(k[4]),
+    volume: num(k[5])
   })).filter(k =>
-    [k.open,k.high,k.low,k.close,k.volume].every(Number.isFinite) &&
-    k.close > 0 && k.volume >= 0
+    [
+      k.open, k.high, k.low,
+      k.close, k.volume
+    ].every(Number.isFinite) &&
+    k.close > 0 &&
+    k.volume >= 0
   ).sort((a,b) => a.time-b.time);
+
+  if (candles.length < 12) {
+    throw new Error(
+      "کندل معتبر کافی نیست: " + candles.length
+    );
+  }
+
+  return candles;
 }
 
-function clamp(n, lo=0, hi=10) {
-  return Math.max(lo, Math.min(hi, n));
-}
-
-function analyze(ticker, candles) {
+/*
+ * پنج امتیاز مستقل از ۱۰.
+ * میانگین آن‌ها امتیاز کلی نامزد است.
+ */
+function analyze(t, candles) {
   const n = candles.length;
   const last = candles[n-1];
   const prev = candles[n-2];
   const recent = candles.slice(-6);
   const baseline = candles.slice(-21,-1);
 
-  if (!baseline.length || !prev || !last) {
-    throw new Error("داده تحلیل کافی نیست");
+  if (!last || !prev || baseline.length < 8) {
+    throw new Error("داده تاریخی کافی نیست");
   }
 
-  const avgVol = baseline.reduce((s,k)=>s+k.volume,0) /
-    baseline.length;
-  const volumeRatio = avgVol > 0 ? last.volume / avgVol : 0;
+  const avgVol = baseline.reduce(
+    (sum,k) => sum+k.volume, 0
+  ) / baseline.length;
 
-  const change1h = prev.close > 0 ?
-    (last.close / prev.close - 1) * 100 : 0;
+  const volumeRatio =
+    avgVol > 0 ? last.volume/avgVol : 0;
 
-  const close4 = candles[n-5] || candles[0];
-  const change4h = close4.close > 0 ?
-    (last.close / close4.close - 1) * 100 : 0;
+  const change1h =
+    prev.close > 0 ?
+    (last.close/prev.close-1)*100 : 0;
 
-  const rangeHigh = Math.max(...recent.map(k=>k.high));
-  const rangeLow = Math.min(...recent.map(k=>k.low));
+  const candle4 = candles[n-5];
+  const change4h =
+    candle4 && candle4.close > 0 ?
+    (last.close/candle4.close-1)*100 : 0;
+
+  const rangeHigh = Math.max(
+    ...recent.map(k=>k.high)
+  );
+  const rangeLow = Math.min(
+    ...recent.map(k=>k.low)
+  );
+
   const rangePct = last.close > 0 ?
     (rangeHigh-rangeLow)/last.close*100 : 999;
 
@@ -248,25 +328,32 @@ function analyze(ticker, candles) {
   const closePosition = candleRange > 0 ?
     (last.close-last.low)/candleRange : 0.5;
 
-  const priceLag = Math.abs(change1h) <= 1.5 &&
+  const priceLag =
+    Math.abs(change1h) <= 1.5 &&
     volumeRatio >= 1.5;
-  const compressed = rangePct <= 5;
-  const demand = volumeRatio >= 1.5 &&
-    closePosition >= 0.55;
-  const baseHolding = last.close >= rangeLow * 1.005;
-  const notExtended = change4h <= 8 && change4h >= -8;
 
-  // پنج امتیاز تطابق جداگانه؛ هر کدام از ۱۰
+  const compressed = rangePct <= 5;
+
+  const demand =
+    volumeRatio >= 1.5 &&
+    closePosition >= 0.55;
+
+  const baseHolding =
+    last.close >= rangeLow*1.005;
+
+  const notExtended =
+    change4h >= -8 && change4h <= 8;
+
   const explosion = clamp(
-    (volumeRatio >= 2 ? 3 : volumeRatio * 1.5) +
-    (Math.abs(change1h) <= 2 ? 2 : 0) +
+    (volumeRatio>=2 ? 3 : volumeRatio*1.5) +
+    (Math.abs(change1h)<=2 ? 2 : 0) +
     (demand ? 2 : 0) +
     (baseHolding ? 1.5 : 0) +
     (notExtended ? 1.5 : 0)
   );
 
   const boom = clamp(
-    (volumeRatio >= 1.5 ? 2.5 : volumeRatio) +
+    (volumeRatio>=1.5 ? 2.5 : volumeRatio) +
     (compressed ? 2.5 : 0) +
     (priceLag ? 2 : 0) +
     (demand ? 1.5 : 0) +
@@ -274,203 +361,247 @@ function analyze(ticker, candles) {
   );
 
   const radar = clamp(
-    (volumeRatio >= 1.5 ? 3 : volumeRatio * 1.5) +
-    (closePosition >= 0.65 ? 2 : closePosition * 2) +
+    (volumeRatio>=1.5 ? 3 : volumeRatio*1.5) +
+    (closePosition>=0.65 ? 2 : closePosition*2) +
     (baseHolding ? 2 : 0) +
     (compressed ? 1.5 : 0) +
     (notExtended ? 1.5 : 0)
   );
 
   const milad = clamp(
-    (volumeRatio >= 3 ? 3 : volumeRatio) +
-    (Math.abs(ticker.change) <= 10 ? 2 : 0) +
-    (Math.abs(change1h) <= 2 ? 2 : 0) +
+    (volumeRatio>=3 ? 3 : volumeRatio) +
+    (Math.abs(t.change)<=10 ? 2 : 0) +
+    (Math.abs(change1h)<=2 ? 2 : 0) +
     (compressed ? 1.5 : 0) +
     (demand ? 1.5 : 0)
   );
 
   const golden = clamp(
-    (volumeRatio >= 2 ? 2.5 : volumeRatio) +
+    (volumeRatio>=2 ? 2.5 : volumeRatio) +
     (priceLag ? 2 : 0) +
     (compressed ? 2 : 0) +
     (demand ? 2 : 0) +
     (baseHolding ? 1.5 : 0)
   );
 
-  const scores = [explosion,boom,radar,milad,golden];
-  const score = scores.reduce((a,b)=>a+b,0)/scores.length;
+  const scores = [
+    explosion, boom, radar, milad, golden
+  ];
 
-  const overlap = scores.filter(s=>s > 6.5).length;
+  const score = scores.reduce(
+    (a,b)=>a+b, 0
+  ) / scores.length;
+
+  const overlap = scores.filter(
+    s=>s>6.5
+  ).length;
+
   const reasons = [];
+
   if (volumeRatio >= 2) reasons.push("جهش حجم");
   if (priceLag) reasons.push("عقب‌ماندگی قیمت");
   if (compressed) reasons.push("فشردگی");
   if (demand) reasons.push("نشانه تقاضا");
-  if (baseHolding) reasons.push("حفظ محدوده کف");
-  if (!reasons.length) reasons.push("شواهد کافی از الگوها دیده نشد");
+  if (baseHolding) reasons.push("حفظ کف");
+
+  if (!reasons.length) {
+    reasons.push("تطابق محدود");
+  }
 
   return {
-    ...ticker,
+    ...t,
+    score,
+    overlap,
     volumeRatio,
     change1h,
     change4h,
-    rangePct,
-    score,
-    overlap,
-    reasons,
     scores,
+    reasons,
     candles: n
   };
 }
 
 async function pool(items, limit, worker) {
-  let index = 0;
+  let next = 0;
+
   async function runner() {
     while (!cancelled) {
-      const i = index++;
+      const i = next++;
       if (i >= items.length) return;
       await worker(items[i], i);
     }
   }
+
   await Promise.all(
-    Array.from({length: Math.min(limit, items.length)}, runner)
+    Array.from(
+      {length: Math.min(limit, items.length)},
+      () => runner()
+    )
   );
 }
 
 function render(results) {
   const qualified = results
     .filter(x => x.score > 6.5)
-    .sort((a,b)=>b.score-a.score || b.overlap-a.overlap);
+    .sort((a,b) =>
+      b.score-a.score || b.overlap-a.overlap
+    );
 
   $("found").textContent = qualified.length;
+
   if (!qualified.length) {
     $("results").innerHTML =
-      '<tr><td colspan="9">هیچ نامزدی با امتیاز بالاتر از ۶٫۵ پیدا نشد. این نتیجه به معنی اسکن موفق همه بازارها نیست؛ گزارش داده را بررسی کن.</td></tr>';
+      '<tr><td colspan="9">نامزد واجد شرایط پیدا نشد.</td></tr>';
     return;
   }
 
   $("results").innerHTML = qualified.map((x,i) => {
     const symbol = x.symbol.toUpperCase();
-    const url = "https://www.lbank.com/trade/" +
+    const url =
+      "https://www.lbank.com/trade/" +
       x.symbol.replace("_","-");
 
     return `<tr>
       <td>${i+1}</td>
-      <td><b>${symbol}</b><br><span class="small">${x.reasons.join("، ")}</span></td>
+      <td>
+        <b>${symbol}</b>
+        <div class="small">${x.reasons.join("، ")}</div>
+      </td>
       <td>${fmt(x.price)}</td>
       <td>${pct(x.change)}</td>
       <td>${x.volumeRatio.toFixed(2)}×</td>
       <td>${pct(x.change1h)} / ${pct(x.change4h)}</td>
       <td>${x.overlap} از ۵</td>
-      <td class="score">${x.score.toFixed(2)}</td>
-      <td><a href="${url}" target="_blank" rel="noopener">مشاهده LBank</a></td>
+      <td class="score">${x.score.toFixed(2)}/۱۰</td>
+      <td><a href="${url}" target="_blank" rel="noopener">LBank</a></td>
     </tr>`;
   }).join("");
 }
 
 async function startScan() {
   if (running) return;
+
   running = true;
   cancelled = false;
+
   $("scanBtn").disabled = true;
-  $("markets").textContent = "…";
+  $("markets").textContent = "—";
   $("checked").textContent = "۰";
   $("found").textContent = "۰";
   $("errors").textContent = "۰";
-  $("details").textContent = "در حال جمع‌آوری داده‌ها…";
+  $("updated").textContent = "";
+  $("details").textContent = "در حال دریافت اطلاعات بازار…";
   $("results").innerHTML =
     '<tr><td colspan="9">در حال اسکن…</td></tr>';
 
-  let success = 0, failures = 0;
+  let success = 0;
+  let failures = 0;
   const results = [];
   const failedSymbols = [];
 
   try {
-    setStatus("در حال دریافت فهرست تیکرهای LBank…");
+    setStatus(
+      "مرحله ۱: اتصال به API و دریافت تیکرها…"
+    );
+
     const tickers = await getTickers();
 
     if (cancelled) return;
 
     $("markets").textContent = tickers.length;
+
     if (!tickers.length) {
-      throw new Error("نماد قابل بررسی دریافت نشد");
+      throw new Error("هیچ جفت USDT معتبری دریافت نشد");
     }
 
-    // اولویت با بازارهای دارای گردش مالی بیشتر است.
-    // گردش مالی فقط برای اولویت بررسی است، نه امتیاز پامپ.
     const selected = tickers
-      .filter(x => Number.isFinite(x.turnover) && x.turnover > 0)
+      .filter(x =>
+        Number.isFinite(x.turnover) &&
+        x.turnover > 0
+      )
       .sort((a,b)=>b.turnover-a.turnover)
-      .slice(0, MAX_DETAIL);
+      .slice(0,MAX_DETAIL);
 
     if (!selected.length) {
-      throw new Error("تیکرها فاقد گردش مالی معتبر هستند");
+      throw new Error(
+        "گردش مالی معتبر برای انتخاب نمادها موجود نیست"
+      );
     }
 
     setStatus(
-      `تعداد جفت‌های USDT دریافت‌شده: ${tickers.length}\n` +
-      `بررسی تفصیلی برنامه‌ریزی‌شده: ${selected.length}\n` +
-      "در حال دریافت کندل‌های یک‌ساعته…"
+      `تیکرهای دریافتی: ${tickers.length}\n` +
+      `نمادهای انتخاب‌شده برای تحلیل: ${selected.length}\n` +
+      "مرحله ۲: دریافت کندل‌های یک‌ساعته…"
     );
 
-    await pool(selected, CONCURRENCY, async (ticker) => {
+    await pool(selected, CONCURRENCY, async t => {
       if (cancelled) return;
+
       try {
-        const candles = await getCandles(ticker.symbol);
+        const candles = await getCandles(t.symbol);
+
         if (cancelled) return;
-        const result = analyze(ticker, candles);
-        results.push(result);
+
+        results.push(analyze(t,candles));
         success++;
       } catch (e) {
         failures++;
-        failedSymbols.push(ticker.symbol + ": " + e.message);
+        failedSymbols.push(
+          t.symbol + " → " + e.message
+        );
       }
 
       $("checked").textContent = success;
       $("errors").textContent = failures;
+
       setStatus(
-        `دریافت تیکرها: ${tickers.length}\n` +
-        `بررسی تفصیلی موفق: ${success}\n` +
+        `تیکرهای دریافتی: ${tickers.length}\n` +
+        `تحلیل موفق: ${success}\n` +
         `خطا یا داده ناکافی: ${failures}\n` +
-        (cancelled ? "اسکن متوقف شد." : "در حال تحلیل…")
+        (cancelled ? "توقف درخواست شد." : "اسکن ادامه دارد…")
       );
     });
 
-    if (!cancelled) {
+    if (cancelled) {
+      render(results);
+    } else {
       render(results);
     }
 
     $("details").textContent =
-      `جفت‌های USDT دریافتی: ${tickers.length}\n` +
-      `نمادهای انتخاب‌شده برای تحلیل: ${selected.length}\n` +
+      `تیکرهای دریافتی: ${tickers.length}\n` +
+      `نمادهای انتخاب‌شده: ${selected.length}\n` +
       `تحلیل موفق: ${success}\n` +
-      `ناموفق یا ناکافی: ${failures}\n` +
-      `محدودیت: در این نسخه کندل‌ها فقط برای حداکثر ${MAX_DETAIL} نماد بررسی می‌شوند. سایر نمادها تحلیل تفصیلی نشده‌اند.\n` +
-      `امتیازها بر اساس شاخص‌های فنی همین کد هستند و تضمین‌کننده حرکت آینده نیستند.\n` +
-      (failedSymbols.length ?
-        "\nنمونه خطاها:\n" + failedSymbols.slice(0,12).join("\n") :
-        "");
+      `خطاها: ${failures}\n` +
+      `توجه: حداکثر ${MAX_DETAIL} نماد از نظر کندلی تحلیل می‌شوند؛ دریافت تیکر به معنی تحلیل کامل همه بازار نیست.\n` +
+      `امتیاز کلی، میانگین پنج شاخص فنی این نسخه است.\n` +
+      (failedSymbols.length
+        ? "\nخطاهای نمونه:\n" +
+          failedSymbols.slice(0,10).join("\n")
+        : "خطای نماد ثبت نشد.");
 
     $("updated").textContent =
-      "آخرین اجرا: " + new Date().toLocaleString("fa-IR");
+      "آخرین اجرا: " +
+      new Date().toLocaleString("fa-IR");
 
-    if (cancelled) {
-      setStatus("اسکن به درخواست کاربر متوقف شد.");
-    } else {
-      setStatus(
-        `پایان اسکن. تیکرها: ${tickers.length} | ` +
-        `تحلیل موفق: ${success} | خطاها: ${failures}`
-      );
-    }
+    setStatus(
+      cancelled
+        ? "اسکن متوقف شد."
+        : `پایان اسکن | موفق: ${success} | خطا: ${failures}`
+    );
+
   } catch (e) {
     setStatus(
-      "دریافت داده با خطا مواجه شد:\n" + e.message +
-      "\nاگر خطای شبکه یا CORS است، API ممکن است از مرورگر در دسترس نباشد."
+      "دریافت داده با خطا مواجه شد:\n" +
+      e.message
     );
+
     $("details").textContent =
-      "هیچ نتیجه‌ای را بدون داده معتبر اعلام نمی‌کنیم. اتصال شبکه، آدرس API و پاسخ سرور را بررسی کن.";
+      "اگر هر دو میزبان با Load failed مواجه شوند، احتمال محدودیت شبکه یا CORS وجود دارد. این کد از پروکسی ناشناس استفاده نمی‌کند.";
+
     $("results").innerHTML =
-      '<tr><td colspan="9">داده معتبر برای اعلام نامزدها دریافت نشد.</td></tr>';
+      '<tr><td colspan="9">داده معتبر برای اعلام نامزد دریافت نشد.</td></tr>';
+
   } finally {
     running = false;
     $("scanBtn").disabled = false;
@@ -478,9 +609,15 @@ async function startScan() {
 }
 
 function stopScan() {
+  if (!running) return;
   cancelled = true;
-  setStatus("درخواست توقف ثبت شد؛ درخواست‌های جاری ممکن است ابتدا تمام شوند.");
+  setStatus(
+    "درخواست توقف ثبت شد. عملیات جاری ممکن است ابتدا پایان یابد."
+  );
 }
+
+$("scanBtn").addEventListener("click", startScan);
+$("stopBtn").addEventListener("click", stopScan);
 </script>
 </body>
 </html>
